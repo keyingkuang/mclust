@@ -1860,8 +1860,9 @@ meEEE <- function(data, z, prior = NULL, control = emControl(),
   cholSigma <- matrix(temp[[6]], p, p)
   pro <- temp[[7]]
   WARNING <- NULL
-  if(loglik > signif(.Machine$double.xmax, 6)) {
-    WARNING <- "singular covariance"
+  browser()
+  if (loglik > signif(.Machine$double.xmax, 6) || isNaN(loglik)) {
+    WARNING <- "singular covariance EEE"
     if(warn) warning(WARNING)
     mu[] <- pro[] <- z[] <- loglik <- NA
     sigma <- array(NA, c(p, p, G))
@@ -2904,8 +2905,9 @@ meEEV <- function(data, z, prior = NULL, control = emControl(),
     sigma <- array(NA, c(p, p, G))
     ret <- -9
   }
-  else if(loglik > signif(.Machine$double.xmax, 6)) {
-    WARNING <- "singular covariance"
+  browser()
+  else if (loglik > signif(.Machine$double.xmax, 6) || isNaN(loglik)) {
+    WARNING <- "singular covariance EEV"
     if(warn) warning(WARNING)
     shape[] <- NA
     mu[] <- pro[] <- z[] <- loglik <- NA
@@ -5462,8 +5464,9 @@ meVEV <- function(data, z, prior = NULL, control = emControl(),
     sigma <- array(NA, c(p, p, G))
     ret <- -9
   }
-  else if(loglik > signif(.Machine$double.xmax, 6)) {
-    WARNING <- "singular covariance"
+  browser()
+  else if (loglik > signif(.Machine$double.xmax, 6) || isNaN(loglik)) {
+    WARNING <- "singular covariance VEV"
     if(warn) warning(WARNING)
     O[] <- shape[] <- scale[] <- NA
     mu[] <- pro[] <- z[] <- loglik <- NA
@@ -7084,8 +7087,9 @@ meVVV <- function(data, z, prior = NULL, control = emControl(),
   cholsigma <- array(temp[[6]], c(p, p, G))
   pro <- temp[[7]]
   WARNING <- NULL
-  if(loglik > signif(.Machine$double.xmax, 6)) {
-    WARNING <- "singular covariance"
+  browser()
+  if (loglik > signif(.Machine$double.xmax, 6) || isNaN(loglik)) {
+    WARNING <- "singular covariance VVV"
     if(warn) warning(WARNING)
     mu[] <- pro[] <- z[] <- loglik <- NA
     sigma <- array(NA, c(p, p, G))
